@@ -26,4 +26,10 @@ export class AnalyzeService {
       };
     }
   }
+
+  detectPatterns(
+    transactions: { description: string; amount: number; date: string }[],
+  ) {
+    return 'Hello';
+  }
 }

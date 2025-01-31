@@ -6,7 +6,7 @@ A full-stack AI-powered transaction analysis tool that normalizes merchant names
 - **Merchant Normalization**: Converts raw transaction descriptions into structured merchant data.
 - **Pattern Detection**: Identifies subscriptions, recurring payments, and spending trends.
 - **CSV Upload**: Users can upload CSV files containing transactions.
-- **Frontend**: Built with React, Tailwind CSS.
+- **Frontend**: Built with React, Next.js Tailwind CSS.
 - **Backend**: NestJS, OpenAI, Redis caching.
 - **Deployment**: Frontend on Netlify, Backend on Railway.
 
@@ -15,6 +15,7 @@ A full-stack AI-powered transaction analysis tool that normalizes merchant names
 ## 📌 Tech Stack
 ### **Frontend:**
 - React
+- Next.js
 - TypeScript
 - Tailwind CSS
 

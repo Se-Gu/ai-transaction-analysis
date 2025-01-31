@@ -6,7 +6,10 @@ async function bootstrap() {
 
   // ✅ Enable CORS
   app.enableCors({
-    origin: 'http://localhost:3000', // Allow requests from frontend
+    origin: [
+      'http://localhost:3000', // Local development
+      'https://transaction-analyzer.netlify.app', // Netlify production frontend
+    ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Allowed methods
     credentials: true, // Allow cookies and authentication headers
   });

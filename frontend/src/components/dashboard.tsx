@@ -16,6 +16,7 @@ interface Data {
 }
 
 export default function Dashboard() {
+  // set the type for data
   const [data, setData] = useState<Data | null>(null);
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
 

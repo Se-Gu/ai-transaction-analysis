@@ -1,19 +1,23 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { AnalyzeService } from './analyze.service';
-import { MerchantDto } from 'src/modules/analyze/dtos/merchant.dto';
-import { PatternsDto } from './dtos/patterns.dto';
+import { TransactionDto } from './dtos/transaction.dto';
 
 @Controller('analyze')
 export class AnalyzeController {
   constructor(private readonly analyzeService: AnalyzeService) {}
 
   @Post('merchant')
-  normalizeMerchant(@Body() merchantDto: MerchantDto) {
-    return this.analyzeService.normalizeMerchant(merchantDto);
+  normalizeMerchant(@Body() transaction: TransactionDto) {
+    return this.analyzeService.normalizeMerchant(transaction);
+  }
+
+  @Post('merchants')
+  normalizeMerchants(@Body() transactions: TransactionDto[]) {
+    return this.analyzeService.normalizeMerchants(transactions);
   }
 
   @Post('patterns')
-  detectPatterns(@Body() patternsDto: PatternsDto) {
-    return this.analyzeService.detectPatterns(patternsDto.transactions);
+  detectPatterns(@Body() transactions: TransactionDto[]) {
+    return this.analyzeService.detectPatterns(transactions);
   }
 }

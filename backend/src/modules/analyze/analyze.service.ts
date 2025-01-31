@@ -1,35 +1,20 @@
 import { Injectable } from '@nestjs/common';
+import { TransactionDto } from './dtos/transaction.dto';
+import { AiService } from '../ai/ai.service';
 
 @Injectable()
 export class AnalyzeService {
-  normalizeMerchant(transaction: { description: string }) {
-    // Simulate AI normalization logic
-    const description = transaction.description.toLowerCase();
+  constructor(private readonly aiService: AiService) {}
 
-    if (description.includes('amzn')) {
-      return {
-        merchant: 'Amazon',
-        category: 'Shopping',
-        sub_category: 'Online Retail',
-        confidence: 0.95,
-        is_subscription: false,
-        flags: ['online_purchase', 'marketplace'],
-      };
-    } else {
-      return {
-        merchant: 'Unknown',
-        category: 'Other',
-        sub_category: 'Unknown',
-        confidence: 0.5,
-        is_subscription: false,
-        flags: [],
-      };
-    }
+  normalizeMerchant(transaction: TransactionDto) {
+    return this.aiService.normalizeMerchant(transaction);
   }
 
-  detectPatterns(
-    transactions: { description: string; amount: number; date: string }[],
-  ) {
-    return 'Hello';
+  normalizeMerchants(transactions: TransactionDto[]) {
+    return this.aiService.normalizeMerchants(transactions);
+  }
+
+  detectPatterns(transactions: TransactionDto[]) {
+    return this.aiService.analyzePatterns(transactions);
   }
 }

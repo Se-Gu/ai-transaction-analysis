@@ -21,48 +21,57 @@ export default function Dashboard() {
       setIsUploadModalOpen(false);
     } catch (error) {
       console.error("Error uploading file:", error);
-      // Handle error (e.g., show an error message to the user)
     }
   };
 
   return (
-    <div className="p-6 max-w-[1200px] mx-auto space-y-6">
-      <header className="flex justify-between items-center">
-        <h1 className="text-xl font-semibold">Transaction Analyzer</h1>
-        <Button
-          variant="default"
-          className="bg-zinc-900 text-white hover:bg-zinc-800"
-          onClick={() => setIsUploadModalOpen(true)}
-        >
-          <Upload className="w-4 h-4 mr-2" />
-          Upload CSV
-        </Button>
+    <div className="min-h-screen flex flex-col">
+      <header className="bg-white border-b border-gray-200">
+        <div className="max-w-[1400px] mx-auto px-6 py-4 flex justify-between items-center">
+          <h1 className="text-xl font-semibold">Transaction Analyzer</h1>
+          <Button
+            variant="default"
+            className="bg-zinc-900 text-white hover:bg-zinc-800"
+            onClick={() => setIsUploadModalOpen(true)}
+          >
+            <Upload className="w-4 h-4 mr-2" />
+            Upload CSV
+          </Button>
+        </div>
       </header>
 
-      <MetricsCards data={data} />
+      <main className="flex-1 py-6">
+        <div className="max-w-[1400px] mx-auto px-6 space-y-6">
+          <div className="bg-white rounded-lg p-6">
+            <MetricsCards data={data} />
+          </div>
 
-      <Tabs defaultValue="merchant-analysis" className="w-full">
-        <TabsList className="bg-transparent border-b rounded-none h-auto p-0 mb-6">
-          <TabsTrigger
-            value="merchant-analysis"
-            className="rounded-none border-b-2 border-transparent px-4 py-2 data-[state=active]:border-black data-[state=active]:bg-transparent"
-          >
-            Merchant Analysis
-          </TabsTrigger>
-          <TabsTrigger
-            value="pattern-detection"
-            className="rounded-none border-b-2 border-transparent px-4 py-2 data-[state=active]:border-black data-[state=active]:bg-transparent"
-          >
-            Pattern Detection
-          </TabsTrigger>
-        </TabsList>
-        <TabsContent value="merchant-analysis">
-          <MerchantAnalysis data={data?.normalized_transactions} />
-        </TabsContent>
-        <TabsContent value="pattern-detection">
-          <PatternDetection data={data?.detected_patterns} />
-        </TabsContent>
-      </Tabs>
+          <div className="bg-white rounded-lg p-6">
+            <Tabs defaultValue="merchant-analysis" className="w-full">
+              <TabsList className="bg-transparent border-b rounded-none h-auto p-0 mb-6">
+                <TabsTrigger
+                  value="merchant-analysis"
+                  className="rounded-none border-b-2 border-transparent px-4 py-2 data-[state=active]:border-black data-[state=active]:bg-transparent"
+                >
+                  Merchant Analysis
+                </TabsTrigger>
+                <TabsTrigger
+                  value="pattern-detection"
+                  className="rounded-none border-b-2 border-transparent px-4 py-2 data-[state=active]:border-black data-[state=active]:bg-transparent"
+                >
+                  Pattern Detection
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent value="merchant-analysis">
+                <MerchantAnalysis data={data?.normalized_transactions} />
+              </TabsContent>
+              <TabsContent value="pattern-detection">
+                <PatternDetection data={data?.detected_patterns} />
+              </TabsContent>
+            </Tabs>
+          </div>
+        </div>
+      </main>
 
       <FileUploadModal
         isOpen={isUploadModalOpen}

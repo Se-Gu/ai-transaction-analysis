@@ -3,10 +3,13 @@ export async function uploadCSV(file: File) {
   formData.append("file", file);
 
   try {
-    const response = await fetch("http://localhost:5800/api/upload", {
-      method: "POST",
-      body: formData,
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/upload`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
 
     if (!response.ok) {
       throw new Error("Network response was not ok");

@@ -10,8 +10,13 @@ import { PatternDetection } from "./pattern-detection";
 import { FileUploadModal } from "./file-upload-modal";
 import { uploadCSV } from "@/utils/api";
 
+interface Data {
+  normalized_transactions: [];
+  detected_patterns: [];
+}
+
 export default function Dashboard() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<Data | null>(null);
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
 
   const handleFileUpload = async (file: File) => {
